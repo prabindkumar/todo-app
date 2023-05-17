@@ -1,21 +1,23 @@
-import dotenv from 'dotenv'
-dotenv.config()
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
-import cookieParser from 'cookie-parser'
-import cors from 'cors'
-const app = express()
+import cookieParser from "cookie-parser";
+import cors from "cors";
+const app = express();
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(cookieParser())
-import user from '../server/routes/user.js'
-import todo from '../server/routes/todo.js'
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+import user from "../server/routes/user.js";
+import todo from "../server/routes/todo.js";
+//
+app.use("/user", user);
+app.use("/todo", todo);
 
-app.use('/user', user)
-app.use('/todo', todo)
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
 
-app.use(cors({
-    origin: 'http://localhost:3000',
-}))
-
-export default app
+export default app;
